@@ -29,6 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app']
 
 
 # Application definition
