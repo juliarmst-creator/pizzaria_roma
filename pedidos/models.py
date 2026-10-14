@@ -4,6 +4,7 @@ from django.db import models
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=50)
+    ordem = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.nome
@@ -22,6 +23,7 @@ class Produto(models.Model):
     preco = models.DecimalField(max_digits=6, decimal_places=2)
     imagem = models.ImageField(upload_to='produtos/', blank=True, null=True)
     disponivel = models.BooleanField(default=True)
+    ordem = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.nome

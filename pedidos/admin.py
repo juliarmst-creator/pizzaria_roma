@@ -7,14 +7,19 @@ from .models import Categoria, Produto, Pedido, ItemPedido
 
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):
-    list_display = ('nome',)
+    list_display = ('nome', 'ordem')
+    list_editable = ('ordem',)
+    ordering = ('ordem', 'nome')
+
 
 
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'categoria', 'preco', 'disponivel')
+    list_display = ('nome', 'categoria', 'preco', 'disponivel', 'ordem')
+    list_editable = ('ordem',)
     list_filter = ('categoria', 'disponivel')
     search_fields = ('nome',)
+    ordering = ('categoria__ordem', 'ordem', 'nome')
 
 
 class ItemPedidoInline(admin.TabularInline):

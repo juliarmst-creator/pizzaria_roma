@@ -1,15 +1,22 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.db.models import Prefetch
 from decimal import Decimal
 
 from .models import Produto, Pedido, ItemPedido, Categoria
 
 
 def cardapio(request):
-    categorias = Categoria.objects.prefetch_related('produtos').all()
+     categorias = Categoria.objects.prefetch_related(
+        Prefetch(
+            'produtos',
+            queryset=Produto.objects.order_by('ordem', 'nome')
+        )
+    ).order_by('ordem', 'nome')
 
-    return render(
+
+     return render(
         request,
         'pedidos/cardapio.html',
         {'categorias': categorias}
